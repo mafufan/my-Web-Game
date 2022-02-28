@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 to 50</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 to 50</title>
+  <style>
+    table{
+      border-spacing: 5px;
+      border-collapse: separate;
+    }
+
+    td {
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      font-size: 30px;
+      font-family: "Roboto";
+      font-weight: bold;
+      color: white;
+      background-color: rgb(70, 104, 167);
+    }
+  </style>
 </head>
+
 <body>
-    <script>
-        
-    </script>
+  <script>
+    const {
+      body
+    } = document;
+    const $table = document.createElement('table');
+
+    const createTable = () => { // 게임 판 생성
+      for (i = 0; i < 5; i++) { // table tr 만들기
+        const $tr = document.createElement('tr');
+        for (j = 0; j < 5; j++) { // table td 만들기
+          const $td = document.createElement('td');
+          $tr.appendChild($td);
+        }
+        $table.appendChild($tr);
+      }
+    }
+    createTable();
+    body.prepend($table);
+    console.log(body);
+  </script>
 </body>
+
 </html>
