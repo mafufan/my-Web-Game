@@ -34,7 +34,22 @@
     const numbers = Array(50).fill().map( // 1 부터 50까지의 숫자 배열 생성
       (e, i) => i + 1
     );
-    console.log(numbers);
+    
+    const shuffledNumbers = []; //[0]~[24] = 셔플된 1~25, [25]~[49] = 셔플된 26~50
+    function shuffle() {  // 숫자 랜덤하게 섞기
+      while(numbers.length > 0){
+        const randIdx = Math.floor(Math.random() * numbers.length);
+        if(numbers[randIdx] <= 25){  // 랜덤한 숫자가 25 이하 일때
+          shuffledNumbers.unshift(numbers.splice(randIdx, 1)); // 배열 앞에서 삽입
+          console.log("25 이하",randIdx);
+        } else{ // 랜덤한 숫자가 26 이상 일때
+          shuffledNumbers.push(numbers.splice(randIdx, 1)); // 배열 뒤에서 삽입
+          console.log("26 이상",randIdx);
+        }
+      }
+    }
+    shuffle();
+    console.log(shuffledNumbers);
 
     const createTable = () => { // 게임 판 생성
       for (i = 0; i < 5; i++) { // table tr 만들기
@@ -48,7 +63,6 @@
     }
     createTable();
     body.prepend($table);
-    console.log(body);
   </script>
 </body>
 
