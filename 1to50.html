@@ -20,6 +20,21 @@
         color: white;
         background-color: rgb(70, 104, 167);
       }
+
+      .clicked {
+        animation: move 0.2s ease-in-out;
+        background-color: rgb(51, 77, 126);
+      }
+
+      @keyframes move {
+        0% {
+          background-color: white;
+        }
+
+        100% {
+          background-color: rgb(62, 95, 156);
+        }
+      }
     </style>
   </head>
 
@@ -55,6 +70,7 @@
       function onNumberClick(event) {
         const ClickedNumber = event.target.textContent;
         if (ClickedNumber == currentNumber) {
+          event.target.classList.toggle("clicked");
           event.target.textContent = shuffledNumbers[currentIdx];
           currentNumber++;
           currentIdx++;
