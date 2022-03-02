@@ -51,6 +51,16 @@
       }
       shuffle();
 
+      let currentNumber = 1;
+      function onNumberClick(event) {
+        const ClickedNumber = event.target.textContent;
+        if (ClickedNumber == currentNumber) {
+          event.target.textContent = shuffledNumbers[currentIdx];
+          currentNumber++;
+          currentIdx++;
+        }
+      }
+
       let currentIdx = 0;
       const createTable = () => {
         // 게임 판 생성
@@ -65,6 +75,7 @@
             currentIdx++;
           }
           $table.appendChild($tr);
+          $table.addEventListener("click", onNumberClick);
         }
       };
       createTable();
