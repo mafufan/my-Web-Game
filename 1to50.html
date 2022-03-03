@@ -99,9 +99,9 @@
           event.target.textContent = shuffledNumbers[currentIdx];
           currentNumber++;
           currentIdx++;
-        }
-        if (ClickedNumber > 25) {
-          event.target.classList.toggle("blank");
+          if (ClickedNumber > 25) {
+            event.target.classList.toggle("blank");
+          }
         }
       }
 
