@@ -51,11 +51,11 @@
   <body>
     <script>
       const { body } = document;
-      const $table = document.createElement("table");
-      const $result = document.createElement("div");
+      const $table = document.createElement("table"); // 게임판 생성
+      const $result = document.createElement("div"); // 게임시간 생성
       $result.className = "result";
 
-      const numbers = Array(50)
+      const numbers = Array(50) // 1~50 까지의 숫자로된 배열
         .fill()
         .map(
           // 1 부터 50까지의 숫자 배열 생성
@@ -76,7 +76,6 @@
           }
         }
       }
-      shuffle();
 
       function startTimer() {
         const startTime = new Date();
@@ -86,28 +85,33 @@
         });
       }
 
-      let timgFlag = false;
-      let currentNumber = 1;
+      let timgFlag = false; // 타이머 플래그
+      let currentNumber = 1; // 현재 눌러야할 숫자
       function onNumberClick(event) {
+        // 숫자 클릭했을때
         const ClickedNumber = event.target.textContent;
         if (ClickedNumber == currentNumber) {
+          //클린한 숫자와 현재 눌러야할 숫자가 같을때
           if (!timgFlag) {
+            // 타이머 실행
             timeFlag = true;
             startTimer();
           }
-          event.target.classList.toggle("clicked");
+          event.target.classList.toggle("clicked"); // 클릭 했을때 배경색 변경
           event.target.textContent = shuffledNumbers[currentIdx];
           currentNumber++;
           currentIdx++;
           if (ClickedNumber > 25) {
+            // 더이상 나올 숫자가 없을때
             event.target.classList.toggle("blank");
           }
         }
       }
 
-      let currentIdx = 0;
+      let currentIdx = 0; // 현재 shuffledNumber 배열 위치
       const createTable = () => {
         // 게임 판 생성
+        shuffle();
         for (i = 0; i < 5; i++) {
           // table tr 만들기
           const $tr = document.createElement("tr");
