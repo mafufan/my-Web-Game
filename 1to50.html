@@ -54,6 +54,7 @@
       const $table = document.createElement("table"); // 게임판 생성
       const $result = document.createElement("div"); // 게임시간 생성
       $result.className = "result";
+      let timeId; // 타이머 Id
 
       const numbers = Array(50) // 1~50 까지의 숫자로된 배열
         .fill()
@@ -78,24 +79,35 @@
       }
 
       function startTimer() {
-        const startTime = new Date();
-        setInterval(() => {
-          let runTime = new Date();
-          $result.textContent = runTime - startTime;
+        //타이머 시작
+        const startTime = new Date(); // 게임 시작할때 시간
+        timeId = setInterval(() => {
+          let runTime = new Date(); // 게임 진행 시간
+          let playTime = new Date(runTime - startTime); // 현재 게임 시간
+          $result.textContent = `${playTime.getSeconds()}.${playTime.getMilliseconds()}`;
         });
       }
 
-      let timgFlag = false; // 타이머 플래그
+      function stopTimer() {
+        //타이머 종료
+        clearInterval(timeId);
+      }
+
+      let timeFlag = false; // 타이머 플래그
       let currentNumber = 1; // 현재 눌러야할 숫자
       function onNumberClick(event) {
         // 숫자 클릭했을때
         const ClickedNumber = event.target.textContent;
         if (ClickedNumber == currentNumber) {
-          //클린한 숫자와 현재 눌러야할 숫자가 같을때
-          if (!timgFlag) {
+          //클릭한 숫자와 현재 눌러야할 숫자가 같을때
+          if (!timeFlag) {
             // 타이머 실행
             timeFlag = true;
             startTimer();
+          }
+          if (ClickedNumber == 50) {
+            // 마지막 숫자를 눌렀을 때
+            stopTimer();
           }
           event.target.classList.toggle("clicked"); // 클릭 했을때 배경색 변경
           event.target.textContent = shuffledNumbers[currentIdx];
