@@ -35,6 +35,16 @@
           background-color: rgb(62, 95, 156);
         }
       }
+
+      .blank {
+        background-color: white;
+      }
+
+      .result {
+        font-size: 30px;
+        font-family: "Roboto";
+        font-weight: bold;
+      }
     </style>
   </head>
 
@@ -42,6 +52,8 @@
     <script>
       const { body } = document;
       const $table = document.createElement("table");
+      const $result = document.createElement("div");
+      $result.className = "result";
 
       const numbers = Array(50)
         .fill()
@@ -66,14 +78,30 @@
       }
       shuffle();
 
+      function startTimer() {
+        const startTime = new Date();
+        setInterval(() => {
+          let runTime = new Date();
+          $result.textContent = runTime - startTime;
+        });
+      }
+
+      let timgFlag = false;
       let currentNumber = 1;
       function onNumberClick(event) {
         const ClickedNumber = event.target.textContent;
         if (ClickedNumber == currentNumber) {
+          if (!timgFlag) {
+            timeFlag = true;
+            startTimer();
+          }
           event.target.classList.toggle("clicked");
           event.target.textContent = shuffledNumbers[currentIdx];
           currentNumber++;
           currentIdx++;
+        }
+        if (ClickedNumber > 25) {
+          event.target.classList.toggle("blank");
         }
       }
 
@@ -95,6 +123,7 @@
         }
       };
       createTable();
+      body.prepend($result);
       body.prepend($table);
     </script>
   </body>
