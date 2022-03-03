@@ -40,10 +40,14 @@
         background-color: white;
       }
 
-      .result {
+      .playTime {
         font-size: 30px;
         font-family: "Roboto";
         font-weight: bold;
+        color: #2c2c2c;
+      }
+      .resultTime {
+        color: #a80808;
       }
     </style>
   </head>
@@ -52,8 +56,8 @@
     <script>
       const { body } = document;
       const $table = document.createElement("table"); // 게임판 생성
-      const $result = document.createElement("div"); // 게임시간 생성
-      $result.className = "result";
+      const $time = document.createElement("div"); // 게임시간 생성
+      $time.className = "playTime";
       let timeId; // 타이머 Id
 
       const numbers = Array(50) // 1~50 까지의 숫자로된 배열
@@ -84,7 +88,7 @@
         timeId = setInterval(() => {
           let runTime = new Date(); // 게임 진행 시간
           let playTime = new Date(runTime - startTime); // 현재 게임 시간
-          $result.textContent = `${playTime.getSeconds()}.${playTime.getMilliseconds()}`;
+          $time.textContent = `${playTime.getSeconds()}.${playTime.getMilliseconds()}`;
         });
       }
 
@@ -108,6 +112,7 @@
           if (ClickedNumber == 50) {
             // 마지막 숫자를 눌렀을 때
             stopTimer();
+            $time.classList.toggle("resultTime");
           }
           event.target.classList.toggle("clicked"); // 클릭 했을때 배경색 변경
           event.target.textContent = shuffledNumbers[currentIdx];
@@ -139,7 +144,7 @@
         }
       };
       createTable();
-      body.prepend($result);
+      body.prepend($time);
       body.prepend($table);
     </script>
   </body>
