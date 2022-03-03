@@ -94,7 +94,10 @@
         timeId = setInterval(() => {
           let runTime = new Date(); // 게임 진행 시간
           let playTime = new Date(runTime - startTime); // 현재 게임 시간
-          $time.textContent = `${playTime.getSeconds()}.${playTime.getMilliseconds()}`;
+          let seconds = playTime.getSeconds();
+          let milliSeconds = playTime.getMilliseconds();
+          let minutes = playTime.getMinutes();
+          $time.textContent = `${minutes}.${seconds}.${milliSeconds}`;
         });
       }
 
@@ -125,7 +128,6 @@
       function onNumberClick(event) {
         // 숫자 클릭했을때
         const ClickedNumber = event.target.textContent;
-        console.log(ClickedNumber);
         if (ClickedNumber == currentNumber) {
           //클릭한 숫자와 현재 눌러야할 숫자가 같을때
           if (!timeFlag) {
